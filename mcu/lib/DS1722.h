@@ -1,5 +1,5 @@
 // DS1722.h
-// TODO: <YOUR NAME>
-// TODO: <YOUR EMAIL>
-// TODO: <DATE>
+// Ellen Yu
+// ellyu@g.hmc.edu
+// Oct. 8 2026
 // TODO: <SHORT DESCRIPTION OF WHAT THIS FILE DOES>

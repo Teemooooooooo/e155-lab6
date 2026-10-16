@@ -1,9 +1,7 @@
-/*
-File: Lab_6_JHB.c
-Author: Josh Brake
-Email: jbrake@hmc.edu
-Date: 9/14/19
-*/
+
+// Ellen Yu Oct. 8 2026
+// ellyu@g.hmc.edu
+
 
 
 #include <string.h>

@@ -1,15 +1,21 @@
 // STM32L432KC_SPI.h
-// TODO: <YOUR NAME>
-// TODO: <YOUR EMAIL>
-// TODO: <DATE>
+// Ellen Yu
+// ellyu@g.hmc.edu
+// Oct. 8 2026
 // TODO: <SHORT DESCRIPTION OF WHAT THIS FILE DOES>
 
 #ifndef STM32L4_SPI_H
 #define STM32L4_SPI_H
 
 #include <stdint.h>
+#include "STM32L432KC_GPIO.h"
 #include <stm32l432xx.h>
 
+
+#define OUTPUT_PIN 0
+#define SCK_PIN    3
+#define MISO_PIN   4
+#define MOSI_PIN   5
 ///////////////////////////////////////////////////////////////////////////////
 // Function prototypes
 ///////////////////////////////////////////////////////////////////////////////

@@ -37,10 +37,10 @@ int inString(char request[], char des[]) {
 void updateRes(char request[]){
   char res = 0b11110000;
 	// The request has been received. now process to determine what presion
-	if (inString(request, "8")==1) {
+  if (inString(request, "8")==1) {
 		res = 0b11110000;
 	}
-	else if (inString(request, "9")==1) {
+  else if (inString(request, "9")==1) {
 		res = 0b11110010;
 	}
   else if (inString(request, "10")==1) {
@@ -53,7 +53,7 @@ void updateRes(char request[]){
 		res = 0b11111000;
 	}
 
-	changeRes(res);
+  changeRes(res);
 }
 
 int updateLEDStatus(char request[])
@@ -84,12 +84,13 @@ int main(void) {
   gpioEnable(GPIO_PORT_B);
   gpioEnable(GPIO_PORT_C);
 
-  pinMode(PB3, GPIO_OUTPUT);
+  pinMode(PA6, GPIO_OUTPUT);
   
   RCC->APB2ENR |= (RCC_APB2ENR_TIM15EN);
   initTIM(TIM15);
   
   USART_TypeDef * USART = initUSART(USART1_ID, 125000);
+
 
   // TODO: Add SPI initialization code
   initSPI(0b101, 1, 1);
@@ -114,21 +115,26 @@ int main(void) {
 
     // TODO: Add SPI code here for reading temperature
     
-    float temp = readTemp();
-    
     // update temperature reading resolution
     updateRes(request);
+    float temp = readTemp();
+    
+
 
     // Update string with current LED state
   
     int led_status = updateLEDStatus(request);
 
     char ledStatusStr[20];
+    char tempReadStr[20];
+    sprintf(tempReadStr, "tempReadStr");
+
     if (led_status == 1)
       sprintf(ledStatusStr,"LED is on!");
     else if (led_status == 0)
       sprintf(ledStatusStr,"LED is off!");
 
+    sprintf(tempReadStr, "Temperature is: %f", temp);
 
     // finally, transmit the webpage over UART
     sendString(USART, webpageStart); // webpage header code

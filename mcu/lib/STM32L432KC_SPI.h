@@ -12,10 +12,10 @@
 #include <stm32l432xx.h>
 
 
-#define OUTPUT_PIN 0
-#define SCK_PIN    3
-#define MISO_PIN   4
-#define MOSI_PIN   5
+#define OUTPUT_PIN PB0
+#define SCK_PIN    PB3
+#define MISO_PIN   PB4
+#define MOSI_PIN   PB5
 ///////////////////////////////////////////////////////////////////////////////
 // Function prototypes
 ///////////////////////////////////////////////////////////////////////////////

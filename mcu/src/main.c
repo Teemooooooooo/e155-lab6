@@ -34,23 +34,45 @@ int inString(char request[], char des[]) {
 	return -1;
 }
 
+//int updateRes(char request[]){
+//  int tempL = 0;
+//	// The request has been received. now process to determine what presion
+//  if (inString(request, "8")==1) {
+//		tempL = 8;
+//	}
+//  else if (inString(request, "9")==1) {
+//		tempL = 9;
+//	}
+//  else if (inString(request, "10")==1) {
+//		tempL = 10;
+//	}
+//  else if (inString(request, "11")==1) {
+//		tempL = 11;
+//	}
+//  else if (inString(request, "12")==1) {
+//		tempL = 812;
+//	}
+
+//  return tempL;
+//}
+
 void updateRes(char request[]){
-  char res = 0b11110000;
+  char res = 0b11110010;
 	// The request has been received. now process to determine what presion
   if (inString(request, "8")==1) {
 		res = 0b11110000;
 	}
   else if (inString(request, "9")==1) {
-		res = 0b11110010;
+		res = 0b11100010;
 	}
   else if (inString(request, "10")==1) {
-		res = 0b11110100;
+		res = 0b11100100;
 	}
   else if (inString(request, "11")==1) {
-		res = 0b11110110;
+		res = 0b11100110;
 	}
   else if (inString(request, "12")==1) {
-		res = 0b11111000;
+		res = 0b11101000;
 	}
 
   changeRes(res);
@@ -96,6 +118,8 @@ int main(void) {
   initSPI(0b101, 1, 1);
   initTemp();
 
+  int tempL = 9;
+  char res = 0xE2;
   while(1) {
     /* Wait for ESP8266 to send a request.
     Requests take the form of '/REQ:<tag>\n', with TAG begin <= 10 characters.
@@ -127,6 +151,7 @@ int main(void) {
 
     char ledStatusStr[20];
     char tempReadStr[20];
+    char debug[20];
     sprintf(tempReadStr, "tempReadStr");
 
     if (led_status == 1)
@@ -134,7 +159,12 @@ int main(void) {
     else if (led_status == 0)
       sprintf(ledStatusStr,"LED is off!");
 
-    sprintf(tempReadStr, "Temperature is: %f", temp);
+
+      updateRes(request);
+
+    sprintf(tempReadStr, "%f", temp);
+
+    sprintf(debug, "%b", res);
 
     // finally, transmit the webpage over UART
     sendString(USART, webpageStart); // webpage header code
@@ -153,6 +183,10 @@ int main(void) {
 
     sendString(USART, "<p>");
     sendString(USART, tempReadStr);
+    sendString(USART, "</p>");
+
+    sendString(USART, "<p>");
+    sendString(USART, debug);
     sendString(USART, "</p>");
 
     sendString(USART, webpageEnd);

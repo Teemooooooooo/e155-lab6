@@ -59,11 +59,11 @@ void initSPI(int br, int cpol, int cpha){
 
 char spiSendReceive(char send){
     // wait for transmit buffer to be empty
-    digitalWrite(OUTPUT_PIN, PIO_HIGH);
+    //digitalWrite(OUTPUT_PIN, PIO_HIGH);
     while((SPI1->SR & SPI_SR_TXE) == 0);
     *((volatile char *) (&SPI1->DR)) = send;
     while(!(SPI1->SR & SPI_SR_RXNE));
     char rec = *((volatile char *)(&SPI1->DR));
-    digitalWrite(OUTPUT_PIN, PIO_LOW);
+    //digitalWrite(OUTPUT_PIN, PIO_LOW);
     return rec;
 }

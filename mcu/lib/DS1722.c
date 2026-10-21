@@ -35,7 +35,7 @@ digitalWrite(OUTPUT_PIN, PIO_HIGH);
 
      //handling negative temp
     if (temp > 128){
-        temp = -(temp - 128);
+        temp = (temp - 256);
     }
 
     return temp;
